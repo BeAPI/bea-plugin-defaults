@@ -8,7 +8,24 @@ Very useful in a multisite, or even just a single site, to easily set the defaul
 
 # How ?
 
-Copy/Paste the content of the mu-plugin then maybe change some options. That's it, simple as pie !
+Copy/Paste the content of the wanted mu-plugin then maybe change some options. That's it, simple as pie !
+
+# What ?
+
+Please find into the following list all listed mu-plugins for setting default options :
+
+* [ACF GMAP KEY](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-acf-gmaps-key.php)
+* [AddToAny Share Buttons](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-add-to-any.php)
+* [Autoptimize](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-autoptimize.php)
+* [Better WordPress Minify](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bwp-minify.php)
+* [Cookie Notice par dFactory](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-cookie-notice.php)
+* [MultilingualPress](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-mlp.php)
+* [Open external links in a new window](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-open-external-links.php)
+* [Optimus](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-optimus.php)
+* [Post Type Order](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-post-type-order.php)
+* [WP Deferred JavaScripts](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-deffer.php)
+* [WP Pagenavi](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-pagenavi.php)
+* [Yoast SEO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wpseo.php)
 
 # Who ?
 
