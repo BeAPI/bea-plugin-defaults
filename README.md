@@ -12,7 +12,7 @@ Copy/Paste the content of the wanted mu-plugin then maybe change some options. T
 
 # What ?
 
-Please find into the following list all listed mu-plugins for setting default options :
+Please find into the following list all mu-plugins for setting default options :
 
 * [ACF GMAP KEY](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-acf-gmaps-key.php)
 * [AddToAny Share Buttons](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-add-to-any.php)
