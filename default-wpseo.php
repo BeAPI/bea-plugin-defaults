@@ -1,9 +1,9 @@
 <?php
 /*
- Plugin Name: BEA Default - Cookie Notice
+ Plugin Name: BEA Default - WordPress SEO
  Version: 1.0.0
  Plugin URI: https://beapi.fr
- Description: Dequeue CSS of plugin Cookie Notice
+ Description: Put metabox in bottom admin
  Author: Be API
  Author URI: https://beapi.fr
 
@@ -27,8 +27,11 @@
 
 */
 
-add_action( 'wp_enqueue_scripts', 'bea_default_cookie_wp_enqueue_scripts', 11 );
+/**
+ * Change priority for SEO metabox
+ */
+add_filter( 'wpseo_metabox_prio', 'bea_default_wpseo_metabox_prio' );
 
-function bea_default_cookie_wp_enqueue_scripts() {
-	wp_dequeue_style( 'cookie-notice-front' );
+function bea_default_wpseo_metabox_prio(){
+	return 'low';
 }

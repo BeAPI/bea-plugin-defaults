@@ -1,15 +1,15 @@
 <?php
 /*
- Plugin Name: BEA Force GMAPS API KEY ( ACF )
+ Plugin Name: BEA Default - Force GMAPS API KEY ( ACF )
  Version: 1.0.0
- Plugin URI: https://www.beapi.fr
+ Plugin URI: https://beapi.fr
  Description: Add API KEY for ACF Google Maps
  Author: Be API
- Author URI: https://www.beapi.fr
+ Author URI: https://beapi.fr
 
  ----
 
- Copyright 2017 BE API Technical team (technique@beapi.fr)
+ Copyright 2018 Be API Technical team (humans@beapi.fr)
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@
 
 */
 
-function bea_acf_api_key( $api ) {
+function bea_default_acf_api_key( $api ) {
 	$api['key'] = 'xxxxxxxxxxxxxxxxxxx';
 
 	return $api;
 }
 
-add_filter( 'acf/fields/google_map/api', 'bea_acf_api_key' );
+add_filter( 'acf/fields/google_map/api', 'bea_default_acf_api_key' );
