@@ -2,9 +2,9 @@
 
 # BEA - Plugin Defaults
 
-Library of mu-plugins to set plugin's default options.
+Library of WordPress mu-plugins to set plugin's default options.
 
-Very useful in a multisite, or even just a single site, to easily set the default options of wanted plugin to apply your needs.
+Very useful in a multisite, or even just a single site, to easily set the default options of a plugin to apply your precies needs.
 
 # How ?
 
