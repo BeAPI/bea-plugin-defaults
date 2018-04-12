@@ -26,6 +26,9 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Cannot access pages directly.' );
+}
 
 add_filter( 'option_' . 'wdjs_do_not_defer_opt', 'bea_default_do_not_deffer' );
 add_filter( 'default_' . 'wdjs_do_not_defer_opt', 'bea_default_do_not_deffer' );
