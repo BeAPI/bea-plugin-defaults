@@ -26,6 +26,9 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Cannot access pages directly.' );
+}
 
 function bea_default_acf_api_key( $api ) {
 	$api['key'] = 'xxxxxxxxxxxxxxxxxxx';
