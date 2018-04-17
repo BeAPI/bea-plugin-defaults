@@ -19,6 +19,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [Autoptimize](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-autoptimize.php)
 * [Better WordPress Minify](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bwp-minify.php)
 * [Cookie Notice par dFactory](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-cookie-notice.php)
+* [Custom Taxonomy Order NE](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-custom-order-taxonomy-ne.php)
 * [MultilingualPress](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-mlp.php)
 * [Open external links in a new window](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-open-external-links.php)
 * [Optimus](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-optimus.php)
