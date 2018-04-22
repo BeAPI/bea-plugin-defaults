@@ -3,7 +3,7 @@
  Plugin Name: BEA Default - Block Bad Queries Pro
  Version: 1.0.0
  Plugin URI: https://beapi.fr
- Description: Set options dans keys + Allow bot Jakarta (for Linkedin)
+ Description: Set options dans keys + Allow pattern Jakarta (for Linkedin)
  Author: Be API
  Author URI: https://beapi.fr
 
