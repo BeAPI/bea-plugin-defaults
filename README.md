@@ -18,7 +18,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [AddToAny Share Buttons](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-add-to-any.php)
 * [Autoptimize](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-autoptimize.php)
 * [Better WordPress Minify](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bwp-minify.php)
-* [Block Bad Queries PRO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/block-bad-queries-pro.php)
+* [Block Bad Queries PRO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bbq.php)
 * [Cookie Notice par dFactory](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-cookie-notice.php)
 * [Custom Taxonomy Order NE](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-custom-order-taxonomy-ne.php)
 * [MultilingualPress](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-mlp.php)
