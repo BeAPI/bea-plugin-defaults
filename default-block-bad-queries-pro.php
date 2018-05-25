@@ -45,8 +45,7 @@ if ( ! defined( 'BBQ_CODE' ) ) {
  * because of the pattern array('enable' => true, 'count' => 0, 'pattern' => 'jakarta'),
  * "Fortunately" we can disable this pattern
  */
-add_filter( 'bbq_patterns', function( $patterns ) {
-
+function bea_bbq_patterns( $patterns ) {
 	if ( ! empty( $patterns['advanced']['user_agent'] ) ) {
 		foreach ( $patterns['advanced']['user_agent'] as $agent => $rules ) {
 			if ( 'jakarta' !== $rules['pattern'] ) {
@@ -58,5 +57,5 @@ add_filter( 'bbq_patterns', function( $patterns ) {
 	}
 
 	return $patterns;
-} );
-
+}
+add_filter( 'bbq_patterns', 'bea_bbq_patterns' );
