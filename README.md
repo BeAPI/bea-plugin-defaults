@@ -9,6 +9,7 @@ Very useful in a multisite, or even just a single site, to easily set the defaul
 # How ?
 
 Copy/Paste the content of the wanted mu-plugin then maybe change some options. That's it, simple as pie !
+Also note that a filter on `pre_{option}` will set by default a value while a filter on `option_{option}` will force this value, update this regarding your needs.
 
 # What ?
 
