@@ -29,7 +29,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Cannot access pages directly.' );
 }
-add_action( 'init', 'bea_hide_acf_menu' );
+add_action( 'admin_init', 'bea_hide_acf_menu' );
 function bea_hide_acf_menu() {
 
 	if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
