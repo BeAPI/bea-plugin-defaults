@@ -3,7 +3,7 @@
  Plugin Name: BEA Default ACF
  Version: 1.0.0
  Plugin URI: https://beapi.fr
- Description: Disable Sharing on custom post type
+ Description: Disable ACF Menu
  Author: Be API
  Author URI: https://beapi.fr
 
