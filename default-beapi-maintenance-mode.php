@@ -36,3 +36,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'beapi.maintenance_mode.whitelist_ips', function () {
 	return [ '163.172.116.223', '230.163.233.172', 'www.xxx.yyy.zzz' ];
 } );
+
+/**
+ * Localize the custome template which can be situated wherever you want
+ */
+add_filter( 'beapi.maintenance_mode.template.path', function () {
+	return WPMU_PLUGIN_DIR . '/templates/template.php';
+} );
