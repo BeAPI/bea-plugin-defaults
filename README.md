@@ -19,6 +19,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [ACF GMAP KEY](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-acf-gmaps-key.php)
 * [AddToAny Share Buttons](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-add-to-any.php)
 * [Autoptimize](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-autoptimize.php)
+* [Be API - Maintenance Mode](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-beapi-maintenance-mode.php)
 * [Better WordPress Minify](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bwp-minify.php)
 * [Block Bad Queries PRO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-bbq.php)
 * [Cookie Notice par dFactory](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-cookie-notice.php)
