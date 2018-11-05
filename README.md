@@ -31,6 +31,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [WP Deferred JavaScripts](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-deffer.php)
 * [WP Pagenavi](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-pagenavi.php)
 * [Yoast SEO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wpseo.php)
+* [Disable Pannel Gutenberg](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-disable-pannel-gutenberg.php)
 
 # Who ?
 
