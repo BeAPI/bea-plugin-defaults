@@ -16,6 +16,7 @@ That's it, simple as pie !
 
 Please find into the following list all mu-plugins for setting default options :
 
+* [Accelerated Mobile Pages](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-accelerated-mobile-pages)
 * [ACF GMAP KEY](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-acf-gmaps-key.php)
 * [AddToAny Share Buttons](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-add-to-any.php)
 * [Autoptimize](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-autoptimize.php)
