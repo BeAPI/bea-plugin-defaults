@@ -34,10 +34,11 @@ add_filter( 'pre_option_optimus', 'bea_default_optimus' );
 
 function bea_default_optimus() {
 	return [
-		'copy_markers'     => 0,
-		'webp_convert'     => 0,
-		'keep_original'    => 0,
-		'secure_transport' => 1,
-		'manual_optimize'  => 0,
+ 		'copy_markers'      => 0,
+                'webp_convert'      => 1,
+                'webp_keeporigext'  => 1,
+                'keep_original'     => 0,
+                'secure_transport'  => 1,
+                'manual_optimize'   => 0
 	];
 }
