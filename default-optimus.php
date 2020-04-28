@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: BEA Default - Optimus
- Version: 1.0.0
+ Version: 1.0.1
  Plugin URI: https://beapi.fr
  Description: Set options dans keys
  Author: Be API
