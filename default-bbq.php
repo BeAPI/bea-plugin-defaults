@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: BEA Default - Block Bad Queries Pro
- Version: 1.0.0
+ Version: 1.1.0
  Plugin URI: https://beapi.fr
  Description: Set license key + allow pattern Jakarta (for Linkedin)
  Author: Be API
@@ -34,9 +34,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This allow to set key in code
  * cause it's a lifetime license
  */
-if ( ! defined( 'BBQ_CODE' ) ) {
+if ( ! defined( 'BBQ_PRO_CODE' ) ) {
 	// licence BBQ pro
-	define( 'BBQ_CODE', 'xxxxxx' );// replace with license key
+	define( 'BBQ_PRO_CODE', 'xxxxxx' );// replace with license key
 }
 
 /**
@@ -58,4 +58,4 @@ function bea_bbq_patterns( $patterns ) {
 
 	return $patterns;
 }
-add_filter( 'bbq_patterns', 'bea_bbq_patterns' );
+add_filter( 'bbq_get_patterns', 'bea_bbq_patterns' );
