@@ -1,0 +1,32 @@
+{
+  "name": "beapi/plugin-defaults",
+  "description": "File defaults for most common plugins.",
+  "license": "GPL-2.0-or-later",
+  "type": "project",
+  "authors": [
+    {
+      "name": "BeAPI",
+      "email": "technique@beapi.fr",
+      "homepage": "https://beapi.fr",
+      "role": "Company"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": { "*": "dist" },
+    "sort-packages": true
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "v0.7.1",
+    "overtrue/phplint": "^2.3",
+    "php-parallel-lint/php-parallel-lint": "v1.2.0",
+    "phpcompatibility/php-compatibility": "9.3.5",
+    "phpro/grumphp-shim": "v1.3.1",
+    "squizlabs/php_codesniffer": "3.5.8",
+    "wp-coding-standards/wpcs": "2.3.0"
+  },
+  "scripts": {
+    "cs": "./vendor/bin/phpcs ./",
+    "cb": "./vendor/bin/phpcbf ./"
+  }
+}

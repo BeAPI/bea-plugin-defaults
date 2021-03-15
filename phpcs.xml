@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Example Project" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+
+    <!-- Exclude the Node Modules directory. -->
+    <exclude-pattern>/vendor/*</exclude-pattern>
+
+    <rule ref="WordPress-Extra">
+        <!-- Exclude as we use a custom autoloader. -->
+        <exclude name="WordPress.Files.FileName"/>
+
+        <!-- Exclude as it conflict with @var declaration. -->
+        <exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+
+        <!-- Exclude as we use custom naming for our class. -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+
+        <!-- Exclude as we use the short array syntax over the long one. -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+    </rule>
+
+    <!-- Only parse php files. -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Show sniff name in report. -->
+    <arg value="sp"/>
+
+    <!-- Show progress. -->
+    <arg value="p"/>
+
+    <!-- Use colors. -->
+    <arg name="colors"/>
+
+    <!-- Set ini. -->
+    <ini name="memory_limit" value="512M"/>
+    <ini name="max_execution_time" value="-1"/>
+
+    <rule ref="PHPCompatibility"/>
+    <config name="testVersion" value="7.2-"/>
+
+</ruleset>
