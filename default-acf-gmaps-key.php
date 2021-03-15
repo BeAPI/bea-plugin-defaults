@@ -32,6 +32,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Cannot access pages directly.' );
 }
 
+add_filter( 'acf/fields/google_map/api', __NAMESPACE__ . '\\default_api_key' );
+add_filter( 'acf/init', __NAMESPACE__ . '\\lite' );
+
 function default_api_key( $api ) {
 	if ( ! defined( 'ACF_GMAPS_API_KEY' ) ) {
 		return $api;
@@ -41,4 +44,12 @@ function default_api_key( $api ) {
 	return $api;
 }
 
-add_filter( 'acf/fields/google_map/api', __NAMESPACE__ . '\\default_api_key' );
+/**
+ * Remove acf panel and updates out of production
+ */
+function lite(): void {
+	if ( \defined( 'WP_ENV' ) && 'production' === WP_ENV ) {
+		acf_update_setting( 'show_admin', false );
+		acf_update_setting( 'show_updates', false );
+	}
+}
