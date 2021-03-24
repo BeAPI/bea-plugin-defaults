@@ -59,9 +59,5 @@ add_filter( 'pre_site_option_optimus_key', __NAMESPACE__ . '\\key' );
  */
 
 function key( $value ) {
-	if ( ! defined( 'OPTIMUS_LICENSE_KEY' ) ) {
-		return $value;
-	}
-
-	return OPTIMUS_LICENSE_KEY;
+	return defined( 'OPTIMUS_LICENSE_KEY' ) ? OPTIMUS_LICENSE_KEY : $value;
 }
