@@ -49,3 +49,15 @@ function default_options() : array {
 		'manual_optimize'  => 0,
 	];
 }
+
+add_filter( 'pre_site_option_optimus_key', __NAMESPACE__ . '\\key' );
+
+/**
+ * Append automatically the optimus license key from constant
+ *
+ * @return string|mixed
+ */
+
+function key( $value ) {
+	return defined( 'OPTIMUS_LICENSE_KEY' ) ? OPTIMUS_LICENSE_KEY : $value;
+}
