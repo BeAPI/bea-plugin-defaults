@@ -9,6 +9,22 @@
 
 namespace BEAPI\Plugin_Defaults\cache_control;
 
+add_filter( 'cache_control_cachedirective', __NAMESPACE__ . '\\add_must_revalidate' );
+
+/**
+ * Add the must-revalidate element to the cache-control header
+ *
+ * @param string $policy
+ *
+ * @return string
+ * @author Nicolas JUEN
+ */
+function add_must_revalidate( string $policy ): string {
+	$policy .= ', must-revalidate';
+
+	return $policy;
+}
+
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\cache_control_default_settings' );
 
 /**
