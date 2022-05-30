@@ -21,7 +21,7 @@ add_filter( 'pre_get_rocket_option_minify_css', '__return_true' );
 // Minifying js files
 add_filter( 'pre_get_rocket_option_minify_js', '__return_true' );
 
-// Minifying css files
+// Defer all js
 add_filter( 'pre_get_rocket_option_defer_all_js', '__return_true' );
 
 // Optimizing css loading by default
