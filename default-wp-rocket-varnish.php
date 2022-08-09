@@ -72,19 +72,25 @@ function set_custom_varnish_ip( $ips ) {
  * @link http://docs.wp-rocket.me/article/61-disable-page-caching
  */
 
-add_filter( 'do_rocket_generate_caching_files', function () {
-	return empty( set_custom_varnish_ip( [] ) );
-} );
+add_filter(
+	'do_rocket_generate_caching_files',
+	function () {
+		return empty( set_custom_varnish_ip( [] ) );
+	}
+);
 
 /***
  * Enable features by default
  * @see https://docs.wp-rocket.me/article/1561-programmatically-toggle-wp-rocket-options-under-specific-conditions
  */
 // Enable varnish purge auto
-add_filter( 'pre_get_rocket_option_varnish_auto_purge', function ( $active ) {
-	if ( ! empty( set_custom_varnish_ip( [] ) ) ) {
-		return true;
-	}
+add_filter(
+	'pre_get_rocket_option_varnish_auto_purge',
+	function ( $active ) {
+		if ( ! empty( set_custom_varnish_ip( [] ) ) ) {
+			return true;
+		}
 
-	return $active;
-} );
+		return $active;
+	}
+);
