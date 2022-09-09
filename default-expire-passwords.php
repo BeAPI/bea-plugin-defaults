@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: BEA Default - Add To Any
+Plugin Name: BEA Default - Expire User Passwords
 Version: 1.0.0
 Plugin URI: https://beapi.fr
-Description: Disable Sharing on custom post type
+Description: Enable & force user passwords expiration for admin (by default) 
 Author: Be API
 Author URI: https://beapi.fr
 
 ----
 
-Copyright 2018 Be API Technical team (humans@beapi.fr)
+Copyright 2022 Be API Technical team (humans@beapi.fr)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,8 +36,7 @@ add_filter( 'option_user_expass_settings', __NAMESPACE__ . '\\default_roles' );
 add_filter( 'default_option_user_expass_settings', __NAMESPACE__ . '\\default_roles' );
 
 /**
- * Activate the administrator at minimum for the pre
- * Allow the
+ * Activate the administrator at minimum (forced)
  *
  * @param $settings
  *
