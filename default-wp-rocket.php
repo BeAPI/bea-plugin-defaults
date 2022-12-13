@@ -35,3 +35,7 @@ add_filter( 'pre_get_rocket_option_preload_links', '__return_true' );
 
 // Enable control Heartbeat
 add_filter( 'pre_get_rocket_option_control_heartbeat', '__return_true' );
+
+// Disable the wprocket 'wp_cache' constant in wp_config to prevent fatal error due to pre-existing constant
+add_filter( 'rocket_set_wp_cache_constant', '__return_false' );
+
