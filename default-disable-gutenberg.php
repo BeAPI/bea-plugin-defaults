@@ -9,7 +9,7 @@
 
 namespace BEAPI\Plugin_Defaults\Disable_Gutenberg;
 
-add_filter( 'pre_option_disable_gutenberg_options', __NAMESPACE__ . '\\disable_gutenberg_options' );
+add_filter( 'default_option_disable_gutenberg_options', __NAMESPACE__ . '\\disable_gutenberg_options' );
 
 /**
  * Pre disable gutenberg options
@@ -33,7 +33,7 @@ function disable_gutenberg_options( $options_gutenberg ): array {
 		'whitelist-slug'             => '', // Whitelist any slug
 		'whitelist-title'            => '', // Whitelist any post title
 		'whitelist'                  => 0,  // Whitelist any post title, slug, or ID
-		'styles-enable'              => 0,  // Option to enable/disable frontend Gutenberg stylesheet
+		'styles-enable'              => 1,  // Option to enable/disable frontend Gutenberg stylesheet
 		'classic-widgets'            => 0,  // Option to restore Classic Widgets
 		'post-type_post'             => 0,  // Disable Gutenberg for Posts
 		'post-type_page'             => 0,  // Disable Gutenberg for Pages
