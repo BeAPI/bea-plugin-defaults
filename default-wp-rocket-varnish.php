@@ -51,7 +51,7 @@ function set_custom_varnish_ip( $ips ) {
 	}
 
 	$env_ips = constant( 'VARNISH_IPS' );
-	$env_ips = explode( ',', $env_ips );
+	$env_ips = array_filter( explode( ',', $env_ips ) );
 
 	if ( empty( $env_ips ) ) {
 		return $ips;
