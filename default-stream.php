@@ -26,7 +26,7 @@ function stream_settings( $options_gutenberg ): array {
 		'general_role_access'               => [
 			'administrator',
 		],
-		'general_records_ttl'               => 30,
+		'general_records_ttl'               => 90,
 		'general_site_access'               => 1,
 		'exclude_rules'                     => [],
 		'advanced_comment_flood_tracking'   => 0,
