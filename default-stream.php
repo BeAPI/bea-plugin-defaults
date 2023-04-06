@@ -15,12 +15,10 @@ add_filter( 'default_option_wp_stream', __NAMESPACE__ . '\\stream_settings' );
 /**
  * Default setting for Stream plugin
  *
- * @param $options_gutenberg
- *
  * @return array
  * @author Egidio CORICA
  */
-function stream_settings( $options_gutenberg ): array {
+function stream_settings(): array {
 	return [
 		'general_keep_records_indefinitely' => '0',
 		'general_role_access'               => [
