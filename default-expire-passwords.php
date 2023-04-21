@@ -45,6 +45,7 @@ add_filter( 'default_option_user_expass_settings', __NAMESPACE__ . '\\default_ro
  */
 function default_roles( $settings = [] ) {
 	$settings['roles']['administrator'] = 1;
+	$settings['send_email']             = 0;
 
 	return $settings;
 }
