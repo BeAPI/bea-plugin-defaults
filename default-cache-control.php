@@ -9,22 +9,6 @@
 
 namespace BEAPI\Plugin_Defaults\cache_control;
 
-add_filter( 'cache_control_cachedirective', __NAMESPACE__ . '\\add_must_revalidate' );
-
-/**
- * Add the must-revalidate element to the cache-control header
- *
- * @param string $policy
- *
- * @return string
- * @author Nicolas JUEN
- */
-function add_must_revalidate( string $policy ): string {
-	$policy .= ', must-revalidate';
-
-	return $policy;
-}
-
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\cache_control_default_settings' );
 
 /**
@@ -38,9 +22,15 @@ function cache_control_default_settings() {
 	}
 
 	foreach ( $cache_control_options as $index => $options ) {
-		$options['s_maxage']             = $options['max_age'];
-		$options['max_age']              = 0;
-		$options['staleerror']           = 50;
+		$options['s_maxage'] = $options['max_age'];
+		$options['max_age']  = 0;
+
+		// On Server error, the page can be served 3 times the original value
+		$options['staleerror'] = $options['max_age'] * 3;
+
+		// The stored by Varnish will be served for 5 times the original value even if the page is expired.
+		// Server will get the new version as soon as one new user get it.
+		$options['stalereval']           = $options['max_age'] * 5;
 		$cache_control_options[ $index ] = $options;
 	}
 }
