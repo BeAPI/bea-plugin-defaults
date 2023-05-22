@@ -26,11 +26,11 @@ function cache_control_default_settings() {
 		$options['max_age']  = 0;
 
 		// On Server error, the page can be served 3 times the original value
-		$options['staleerror'] = $options['max_age'] * 3;
+		$options['staleerror'] = $options['s_maxage'] * 3;
 
 		// The stored by Varnish will be served for 5 times the original value even if the page is expired.
 		// Server will get the new version as soon as one new user get it.
-		$options['stalereval']           = $options['max_age'] * 5;
+		$options['stalereval']           = $options['s_maxage'] * 5;
 		$cache_control_options[ $index ] = $options;
 	}
 }
