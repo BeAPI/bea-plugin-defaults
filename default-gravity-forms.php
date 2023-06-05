@@ -45,5 +45,5 @@ add_filter( 'gform_submit_button', __NAMESPACE__ . '\\form_submit_button', 10, 2
  * @author Léonard Phoumpakka
  */
 function form_submit_button( string $button, array $form ): string {
-	return sprintf( "<button class='button gform_button' id='gform_submit_button_%d'><span>%s</span></button>", $form['id'], __( 'Submit' ) );
+	return sprintf( "<button class='button gform_button' id='gform_submit_button_%d'><span>%s</span></button>", $form['id'], esc_html__( 'Submit', 'gravityforms' ) );
 }
