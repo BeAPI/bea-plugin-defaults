@@ -59,7 +59,7 @@ add_filter( 'pre_option_rg_gforms_key', __NAMESPACE__ . '\\default_options', 999
  * @return mixed
  */
 function default_options( $value ) {
-	return defined('GF_LICENSE_KEY') ? GF_LICENSE_KEY : $value;
+	return defined( 'GF_LICENSE_KEY' ) ? GF_LICENSE_KEY : $value;
 }
 
 add_action( 'gform_after_save_form', __NAMESPACE__ . '\\configuration_default_forms', 10, 2 );
@@ -84,7 +84,7 @@ function configuration_default_forms( array $form, bool $is_new ): void {
 		'retention' => [ // form data is deleted after 90 days
 			'policy'              => 'trash',
 			'retain_entries_days' => '90',
-		]
+		],
 	];
 
 	\GFAPI::update_form( $form );
