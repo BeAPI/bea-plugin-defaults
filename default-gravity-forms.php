@@ -47,3 +47,45 @@ add_filter( 'gform_submit_button', __NAMESPACE__ . '\\form_submit_button', 10, 2
 function form_submit_button( string $button, array $form ): string {
 	return sprintf( "<button class='button gform_button' id='gform_submit_button_%d'><span>%s</span></button>", $form['id'], esc_html__( 'Submit', 'gravityforms' ) );
 }
+
+add_filter( 'pre_option_rg_gforms_key', __NAMESPACE__ . '\\default_options', 999 );
+
+/**
+ * Append automatically the gravity forms license key from constant
+ *
+ *
+ * @param $value
+ *
+ * @return mixed
+ */
+function default_options( $value ) {
+	return defined('GF_LICENSE_KEY') ? GF_LICENSE_KEY : $value;
+}
+
+add_action( 'gform_after_save_form', __NAMESPACE__ . '\\configuration_default_forms', 10, 2 );
+
+/**
+ * Default configuration when creating a form
+ *
+ * @param array $form
+ * @param bool $is_new
+ *
+ * @return void
+ * @author Egidio CORICA
+ */
+function configuration_default_forms( array $form, bool $is_new ): void {
+	if ( ! $is_new ) {
+		return;
+	}
+
+	$form['enableHoneypot'] = true;
+	$form['personalData']   = [
+		'preventIP' => true, // the IP address of the user submitting the form will not be saved
+		'retention' => [ // form data is deleted after 90 days
+			'policy'              => 'trash',
+			'retain_entries_days' => '90',
+		]
+	];
+
+	\GFAPI::update_form( $form );
+}
