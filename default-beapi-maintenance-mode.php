@@ -39,7 +39,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter(
 	'beapi.maintenance_mode.whitelist_ips',
 	function ( array $ips = [] ): array {
-		$ips[] = '163.172.116.223';
+		if( ! defined( 'BEAPI_MAINTENANCE_MODE_IPS' ) || empty( BEAPI_MAINTENANCE_MODE_IPS ) ) {
+			return $ips;
+		}
+
+		$ips[] = BEAPI_MAINTENANCE_MODE_IPS;
 
 		return $ips;
 	}
