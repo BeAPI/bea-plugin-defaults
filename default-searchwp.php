@@ -34,6 +34,9 @@ if ( defined( 'WP_ENV' ) && WP_ENV === 'production' ) {
 	return;
 }
 
+const HTTP_USER = 'XXXXXXXX';
+const HTTP_PWD  = 'ZZZZZZZZ';
+
 add_filter( 'searchwp\indexer\alternate', '__return_true' );
 
 
@@ -42,8 +45,8 @@ add_filter(
 	function () {
 		return [
 			// Customize with basic auth credentials
-			'username' => 'XXXXXXXX',
-			'password' => 'ZZZZZZZZ',
+			'username' => HTTP_USER,
+			'password' => HTTP_PWD,
 		];
 	}
 );
@@ -62,7 +65,7 @@ add_filter(
 		$cron_request['args']['headers']['Authorization'] = sprintf(
 			'Basic %s',
 			// Customize with basic auth credentials
-			base64_encode( 'XXXXXXXX:ZZZZZZZZ' ) //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+			base64_encode( HTTP_USER . ':' . HTTP_PWD ) //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 		);
 
 		return $cron_request;
