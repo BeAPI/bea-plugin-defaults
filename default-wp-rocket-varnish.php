@@ -18,17 +18,6 @@ function purge_rocket_varnish_scheme() {
 	return 'http';
 }
 
-add_filter( 'rocket_varnish_purge_request_args', __NAMESPACE__ . '\\purge_rocket_varnish_args' );
-
-/**
- * Defines purge method for rocket/varnish (default = PURGE)
- */
-function purge_rocket_varnish_args( $args ) {
-	$args['method'] = 'BAN';
-
-	return $args;
-}
-
 add_filter( 'rocket_varnish_ip', __NAMESPACE__ . '\\set_custom_varnish_ip' );
 
 /**
