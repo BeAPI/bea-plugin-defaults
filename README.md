@@ -28,6 +28,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [MultilingualPress](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-mlp.php)
 * [Open external links in a new window](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-open-external-links.php)
 * [Optimus](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-optimus.php)
+* [Prevent Direct Access](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-prevent-direct-access.php)
 * [Post Type Order](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-post-type-order.php)
 * [WP Deferred JavaScripts](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-deffer.php)
 * [WP Pagenavi](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-pagenavi.php)
