@@ -82,7 +82,7 @@ function configuration_default_forms( array $form, bool $is_new ): void {
 	$form['personalData']   = [
 		'preventIP' => true, // the IP address of the user submitting the form will not be saved
 		'retention' => [ // form data is deleted after 90 days
-			'policy'              => 'trash',
+			'policy'              => 'delete',
 			'retain_entries_days' => '90',
 		],
 	];
