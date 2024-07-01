@@ -57,7 +57,8 @@ function default_options(): array {
 		'disallowed-sizes'       => [],
 		'admin_bar_menu'         => 0,
 		'partner_links'          => 0,
-		'convert_to_avif'        => 1,
-		'convert_to_webp'        => 1,
+		'convert_to_avif'        => 0,
+		'convert_to_webp'        => 0,
+		'optimization_format'    => 'avif',
 	];
 }
