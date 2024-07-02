@@ -59,5 +59,6 @@ function default_options(): array {
 		'partner_links'          => 0,
 		'convert_to_avif'        => 1,
 		'convert_to_webp'        => 1,
+		'optimization_format'    => 'avif',
 	];
 }
