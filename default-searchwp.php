@@ -35,7 +35,7 @@ if ( defined( 'WP_ENV' ) && WP_ENV === 'production' ) {
 }
 
 // Constants to be defined as env vars
-if ( ! defined( SEARCHWP_AUTH_USER ) || ! defined( SEARCHWP_AUTH_PWD ) ) {
+if ( ! defined( 'SEARCHWP_AUTH_USER' ) || ! defined( 'SEARCHWP_AUTH_PWD' ) ) {
 	return;
 }
 
