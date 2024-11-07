@@ -61,7 +61,6 @@ function wp_headers( array $headers ): array {
 	$csp_header                       = defined( 'CSP_REPORT_ONLY' ) && CSP_REPORT_ONLY ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy';
 	$csp_headers_array[ $csp_header ] = get_prepare_csp( $csp );
 
-
 	$custom_headers_array = [];
 
 	/**$custom_headers_array = [
@@ -124,10 +123,9 @@ function get_csp_headers(): array {
 		'object-src'   => '\'none\'',
 	];
 
-	if ( 'production' === WP_ENV ) {
+	//if ( 'production' === WP_ENV ) {
 		//$csp = [];
-	}
-
+	//}
 
 	return apply_filters( 'csp_headers', $csp );
 }

@@ -14,7 +14,11 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": { "*": "dist" },
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpro/grumphp-shim": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "v0.7.1",
