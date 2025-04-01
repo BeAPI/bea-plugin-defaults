@@ -1,7 +1,8 @@
 <?php
 /*
-Plugin Name: No transients
+Plugin Name: No transients in database
 Version: 1.0.0
+Description: Prevent transients from being stored in the database when external object cache is being used
 Plugin URI: https://beapi.fr
 Author: Be API
 Author URI: https://beapi.fr
@@ -39,8 +40,6 @@ class NoTransients {
 	 * Initialize the class and set up hooks
 	 */
 	public function __construct() {
-
-		
 		// Prevent transients from being retrieved
 		add_filter( 'pre_option', [ $this, 'prevent_transient_retrieval' ], 10, 2 );
 
@@ -59,6 +58,7 @@ class NoTransients {
 		// Show admin notice if no external object cache is being used
 		add_action( 'admin_notices', [ $this, 'show_admin_notice' ] );
 
+		// Clean up transients from the database
 		add_action( 'beapi_clean_transients', [ $this, 'cleanup_transients' ] );
 	}
 
@@ -67,6 +67,7 @@ class NoTransients {
 	 *
 	 * @param mixed $pre The pre-option value
 	 * @param string $option The option name
+     * 
 	 * @return mixed The modified pre-option value
 	 */
 	public function prevent_transient_retrieval( $pre, $option ) {
@@ -142,5 +143,4 @@ class NoTransients {
 	}
 }
 
-// Initialize the class
 new NoTransients();
