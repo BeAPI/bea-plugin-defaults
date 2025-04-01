@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 namespace BEAPI\Plugin_Defaults\Wp_Saml_Auth;
 
 // Constants to be defined as env vars
-if ( ! defined( 'SAML_IDP_ENTITY_ID' ) || ! defined( 'SAML_IDP_URL' ) || ! defined( 'SAML_LOGOUT_URL' ) || ! defined( 'SAML_CERT_PATH' ) ) {
+if ( ! defined( 'SAML_IDP_ENTITY_ID' ) || ! defined( 'SAML_IDP_URL' ) || ! defined( 'SAML_LOGOUT_URL' ) || ! defined( 'SAML_CERT_PATH' ) || ! file_exists( SAML_CERT_PATH ) ) {
 	return;
 }
 
