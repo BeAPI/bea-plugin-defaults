@@ -33,7 +33,7 @@ Please find into the following list all mu-plugins for setting default options :
 * [WP Pagenavi](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wp-pagenavi.php)
 * [Yoast SEO](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wpseo.php)
 * [Disable Pannel Gutenberg](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-disable-pannel-gutenberg.php)
-
+* [WP Grid Builder](https://github.com/BeAPI/bea-plugin-defaults/blob/master/default-wpgb.php)
 # Who ?
 
 Created by [Be API](https://beapi.fr), the French WordPress leader agency since 2009. Based in Paris, we are more than 30 people and always [hiring](https://beapi.workable.com) some fun and talented guys. So we will be pleased to work with you.
