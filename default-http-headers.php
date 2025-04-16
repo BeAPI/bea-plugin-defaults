@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: BeAPI Default - HTTP Headers
-Version: 1.0.0
+Version: 1.1.0
 Plugin URI: https://beapi.fr
 Description: Add custom http headers (CP, CSP, ....)
 Author: Be API
@@ -41,37 +41,70 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array
  *
  * @author Alexandre Sadowski
- *
  */
 function wp_headers( array $headers ): array {
 	if ( is_admin() ) {
 		return $headers;
 	}
 
-	$csp = get_csp_headers();
+	$csp            = get_csp_headers();
+	$has_report_url = defined( 'WP_SENTRY_SECURITY_HEADER_ENDPOINT' ) && ! empty( WP_SENTRY_SECURITY_HEADER_ENDPOINT );
+	$report_only    = defined( 'CSP_REPORT_ONLY' ) && CSP_REPORT_ONLY;
 
-	if ( defined( 'CSP_REPORT_ONLY' ) && defined( 'WP_SENTRY_SECURITY_HEADER_ENDPOINT' ) ) {
-		$csp['report-uri'] = WP_SENTRY_SECURITY_HEADER_ENDPOINT;
-		$csp['report-to']  = 'csp-endpoint';
+	if ( $report_only && $has_report_url ) {
+		$report_url = WP_SENTRY_SECURITY_HEADER_ENDPOINT;
+		// include env name in the URL if available.
+		if ( defined( 'WP_SENTRY_ENV' ) && ! empty( WP_SENTRY_ENV ) ) {
+			$report_url = add_query_arg( array( 'sentry_environment' => WP_SENTRY_ENV ), $report_url );
+		}
+
+		/**
+		 * Setup CSP violation reporting.
+		 *
+		 * @see https://docs.sentry.io/platforms/go/security-policy-reporting/#content-security-policy Sentry documentation on setting the CSP reporting.
+		 */
+		// CSP directives use for reporting CSP violations.
+		$csp['report-to'] = 'csp-endpoint';
+
+		// Deprecated CSP directive for reporting, kept for compatibility with old browsers.
+		$csp['report-uri'] = $report_url;
+
+		// Include reporting endpoint domain to the list of allowed host
+		$csp['connect-src'] = ( $csp['connect-src'] ?? '' ) . ' ' . wp_parse_url( $report_url, PHP_URL_HOST );
+
+		// Additional headers required by the "report-to" CSP directive.
+		$headers['Report-To']           = wp_json_encode(
+			[
+				'group'     => 'csp-endpoint',
+				'max_age'   => 10886400,
+				'endpoints' => [
+					'url'                => $report_url,
+					'include_subdomains' => true,
+				]
+			]
+		);
+		$headers['Reporting-Endpoints'] = sprintf( 'csp-endpoint="%s"', $report_url );
 	}
 
 	/**
 	 * We rely on the CSP_REPORT_ONLY .env value to decide whether we apply the CSP or just report the errors
 	 */
-	$csp_header                       = defined( 'CSP_REPORT_ONLY' ) && CSP_REPORT_ONLY ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy';
-	$csp_headers_array[ $csp_header ] = get_prepare_csp( $csp );
+	$csp_header             = $report_only ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy';
+	$headers[ $csp_header ] = get_prepare_csp( $csp );
 
-	$custom_headers_array = [];
+	/**
+	 * Additional security headers.
+	 *
+	 * Example :
+	 * $headers['X-Content-Type-Options'] = 'nosniff';
+	 * $headers['X-Frame-Options']        = 'SAMEORIGIN';
+	 * $headers['Referrer-Policy']        = 'no-referrer-when-downgrade';
+	 * $headers['Permissions-Policy']     = 'accelerometer=(), geolocation=(), fullscreen=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), display-capture=()';
+	 */
+	$headers['X-Content-Type-Options'] = 'nosniff';
+	$headers['X-Frame-Options']        = 'SAMEORIGIN';
 
-	/**$custom_headers_array = [
-	 * 'X-Content-Type-Options'              => 'nosniff',
-	 * 'X-Frame-Options'                     => 'SAMEORIGIN',
-	 * 'X-XSS-Protection'                    => '1; mode=block',
-	 * 'Referrer-Policy'                     => 'no-referrer-when-downgrade',
-	 * 'Permissions-Policy'                  => 'accelerometer=(), geolocation=(), fullscreen=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), display-capture=()',
-	 * ];**/
-
-	return wp_parse_args( $csp_headers_array, $custom_headers_array );
+	return $headers;
 }
 
 add_filter( 'wp_headers', __NAMESPACE__ . '\\wp_headers', 99 );
@@ -111,20 +144,21 @@ function get_prepare_csp( array $csp ): string {
  */
 function get_csp_headers(): array {
 	$csp = [
-		'default-src'  => '\'self\'',
-		'script-src'   => '\'self\'',
-		'style-src'    => '\'self\'',
-		'img-src'      => '\'self\'',
-		'font-src'     => '\'self\'',
-		'connect-src'  => '\'self\'',
-		'frame-src'    => '\'self\'',
-		'manifest-src' => '\'self\'',
-		'worker-src'   => '\'self\'',
-		'object-src'   => '\'none\'',
+		'default-src'  => "'self'",
+		'script-src'   => "'self'",
+		'style-src'    => "'self'",
+		'img-src'      => "'self'",
+		'font-src'     => "'self'",
+		'connect-src'  => "'self'",
+		'frame-src'    => "'self'",
+		'manifest-src' => "'self'",
+		'worker-src'   => "'self'",
+		'object-src'   => "'self'",
+		'base-uri'     => "'self'",
 	];
 
 	//if ( 'production' === WP_ENV ) {
-		//$csp = [];
+	//    $csp = [];
 	//}
 
 	return apply_filters( 'csp_headers', $csp );
