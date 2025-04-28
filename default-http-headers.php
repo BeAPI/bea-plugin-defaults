@@ -64,13 +64,13 @@ function wp_headers( array $headers ): array {
 		 * @see https://docs.sentry.io/platforms/go/security-policy-reporting/#content-security-policy Sentry documentation on setting the CSP reporting.
 		 */
 		// CSP directives use for reporting CSP violations.
-		$csp['report-to'] = 'csp-endpoint';
+		$csp['report-to'] = [ 'csp-endpoint' ];
 
 		// Deprecated CSP directive for reporting, kept for compatibility with old browsers.
-		$csp['report-uri'] = $report_url;
+		$csp['report-uri'] = [ $report_url ];
 
 		// Include reporting endpoint domain to the list of allowed host
-		$csp['connect-src'] = ( $csp['connect-src'] ?? '' ) . ' ' . wp_parse_url( $report_url, PHP_URL_HOST );
+		$csp['connect-src'][] = wp_parse_url( $report_url, PHP_URL_HOST );
 
 		// Additional headers required by the "report-to" CSP directive.
 		$headers['Report-To']           = wp_json_encode(
@@ -110,7 +110,6 @@ function wp_headers( array $headers ): array {
 add_filter( 'wp_headers', __NAMESPACE__ . '\\wp_headers', 99 );
 
 /**
- *
  * Prepare CSP attribute values
  *
  * @param array $csp
@@ -129,37 +128,59 @@ function get_prepare_csp( array $csp ): string {
 		if ( empty( $value ) ) {
 			continue;
 		}
-		$csp_values .= $key . ' ' . $value . '; ';
+
+		// add space between values.
+		if ( ! empty( $csp_values ) ) {
+			$csp_values .= ' ';
+		}
+
+		$csp_values .= sprintf(
+			'%s %s;',
+			$key,
+			implode( ' ', $value )
+		);
 	}
 
-	// Remove last space
-	return trim( $csp_values );
+	return $csp_values;
 }
 
 /**
- * Generate CSP headers array
+ * Get CSP headers directives.
  *
- * @return array
+ * Add specific values for each directive in the corresponding array.
+ *
+ * Some values MUST be wrap with single quote : `'self'`, `'unsafe-inline'` and `'unsafe-eval'`. Use double quotes
+ * when you want to add them in the array (e.g. `"'self'"`).
+ *
+ * @return array<string, array>
  * @author Alexandre Sadowski
  */
 function get_csp_headers(): array {
+
 	$csp = [
-		'default-src'  => "'self'",
-		'script-src'   => "'self'",
-		'style-src'    => "'self'",
-		'img-src'      => "'self'",
-		'font-src'     => "'self'",
-		'connect-src'  => "'self'",
-		'frame-src'    => "'self'",
-		'manifest-src' => "'self'",
-		'worker-src'   => "'self'",
-		'object-src'   => "'self'",
-		'base-uri'     => "'self'",
+		'default-src'     => [ "'self'" ],
+		'script-src'      => [ "'self'" ],
+		'style-src'       => [ "'self'" ],
+		'img-src'         => [ "'self'" ],
+		'font-src'        => [ "'self'" ],
+		'connect-src'     => [ "'self'" ],
+		'media-src'       => [ "'self'" ],
+		'frame-src'       => [ "'self'" ],
+		'manifest-src'    => [ "'self'" ],
+		'worker-src'      => [ "'self'" ],
+		'object-src'      => [ "'self'" ],
+		'base-uri'        => [ "'self'" ],
+		'frame-ancestors' => [ "'self'" ],
 	];
 
 	//if ( 'production' === WP_ENV ) {
 	//    $csp = [];
 	//}
 
+	/**
+	 * Filter CSP values.
+	 *
+	 * @param array $csp The array of CSP values keyed by their directives.
+	 */
 	return apply_filters( 'csp_headers', $csp );
 }
