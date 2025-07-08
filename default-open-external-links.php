@@ -45,7 +45,7 @@ add_filter( 'default_site_option_external_links_in_new_windows_ignore', __NAMESP
  *
  * @return string
  */
-function ignore_links( $value ) :string {
+function ignore_links( $value ): string {
 	if ( ! defined( 'OPEN_EXTERNAL_LINKS_IGNORE' ) ) {
 		return $value;
 	}
