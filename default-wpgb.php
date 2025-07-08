@@ -43,6 +43,6 @@ add_filter( 'wp_grid_builder/facet/title_tag', __NAMESPACE__ . '\\facet_title_ta
  *
  * @return string
  */
-function facet_title_tag( string $title_tag ): string {
+function facet_title_tag( string $title_tag ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 	return 'p';
 }
