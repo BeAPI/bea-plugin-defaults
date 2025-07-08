@@ -19,7 +19,7 @@ add_filter( 'default_option_disable_gutenberg_options', __NAMESPACE__ . '\\disab
  * @return array
  * @author Egidio CORICA
  */
-function disable_gutenberg_options( $options_gutenberg ): array {
+function disable_gutenberg_options( $options_gutenberg ): array { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 	return [
 		'disable-all'                => 0,  // Disable Gutenberg everywhere
 		'disable-nag'                => 0,  // Disable Gutenberg admin notice
