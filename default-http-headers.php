@@ -55,7 +55,7 @@ function wp_headers( array $headers ): array {
 		$report_url = WP_SENTRY_SECURITY_HEADER_ENDPOINT;
 		// include env name in the URL if available.
 		if ( defined( 'WP_SENTRY_ENV' ) && ! empty( WP_SENTRY_ENV ) ) {
-			$report_url = add_query_arg( array( 'sentry_environment' => WP_SENTRY_ENV ), $report_url );
+			$report_url = add_query_arg( [ 'sentry_environment' => WP_SENTRY_ENV ], $report_url );
 		}
 
 		/**
@@ -80,7 +80,7 @@ function wp_headers( array $headers ): array {
 				'endpoints' => [
 					'url'                => $report_url,
 					'include_subdomains' => true,
-				]
+				],
 			]
 		);
 		$headers['Reporting-Endpoints'] = sprintf( 'csp-endpoint="%s"', $report_url );

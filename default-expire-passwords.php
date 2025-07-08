@@ -3,7 +3,7 @@
 Plugin Name: BEA Default - Expire User Passwords
 Version: 1.0.0
 Plugin URI: https://beapi.fr
-Description: Enable & force user passwords expiration for admin (by default) 
+Description: Enable & force user passwords expiration for admin (by default)
 Author: Be API
 Author URI: https://beapi.fr
 

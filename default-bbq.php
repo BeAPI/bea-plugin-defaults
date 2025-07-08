@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array
  */
-function bbq_patterns( array $patterns ) : array {
+function bbq_patterns( array $patterns ): array {
 	if ( ! empty( $patterns['advanced']['user_agent'] ) ) {
 		foreach ( $patterns['advanced']['user_agent'] as $agent => $rules ) {
 			if ( 'jakarta' !== $rules['pattern'] ) {

@@ -39,7 +39,7 @@ add_filter( 'pre_option_optimus', __NAMESPACE__ . '\\default_options' );
  *
  * @return int[]
  */
-function default_options() : array {
+function default_options(): array {
 	return [
 		'copy_markers'     => 0,
 		'webp_convert'     => 1,

@@ -51,7 +51,7 @@ class NoTransients {
 
 		// Prevent transients from being updated
 		add_action( 'updated_option', [ $this, 'delete_transient_option' ] );
-		
+
 		// Set up cleanup cron job
 		add_action( 'init', [ $this, 'setup_cleanup_cron' ] );
 
@@ -67,7 +67,7 @@ class NoTransients {
 	 *
 	 * @param mixed $pre The pre-option value
 	 * @param string $option The option name
-     * 
+	 *
 	 * @return mixed The modified pre-option value
 	 */
 	public function prevent_transient_retrieval( $pre, $option ) {

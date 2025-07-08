@@ -4,9 +4,16 @@ grumphp:
     git_blacklist:
       keywords:
         - "var_dump("
+        - "console.log("
+        - "log("
         - "<<<<<<< HEAD"
+        - "beapi.top"
+        - "beapi.space"
+        - "beapi.science"
+        - "beapi.xyz"
+        - "ddev.site"
       whitelist_patterns: []
-      triggered_by: ['php']
+      triggered_by: ['php', 'js', 'scss', 'css']
       regexp_type: G
     phplint:
       exclude: ['vendor']
@@ -22,5 +29,9 @@ grumphp:
     jsonlint:
       ignore_patterns: []
       detect_key_conflicts: false
+    psalm:
+      config: psalm.xml
+      triggered_by: ['php']
+      show_info: true
   testsuites: []
   extensions: []
