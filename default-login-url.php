@@ -43,5 +43,5 @@ add_filter( 'login_headerurl', __NAMESPACE__ . '\\custom_login_url' );
  * @author Milan RICOUL
  */
 function custom_login_url( $url ) {
-    return 'https://beapi.fr/';
+	return 'https://beapi.fr/';
 }

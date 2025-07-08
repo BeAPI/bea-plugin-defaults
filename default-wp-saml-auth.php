@@ -93,7 +93,7 @@ function wp_saml_filter_option( $value, $option_name ) {
 				],
 				// Required: Contents of the IDP's public x509 certificate.
 				// Use file_get_contents() to load certificate contents into scope.
-				'x509cert'                 => file_get_contents( SAML_CERT_PATH ),
+				'x509cert'                 => file_get_contents( SAML_CERT_PATH ), //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 				// Optional: Instead of using the x509 cert, you can specify the fingerprint and algorithm.
 				'certFingerprint'          => '',
 				'certFingerprintAlgorithm' => '',

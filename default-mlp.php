@@ -39,7 +39,7 @@ add_filter( 'pre_site_option_state_modules', __NAMESPACE__ . '\\default_options'
  *
  * @return string[]
  */
-function default_options() : array {
+function default_options(): array {
 	return [
 		'class-Mlp_Cpt_Translator'                    => 'off',
 		'class-Mlp_Advanced_Translator'               => 'off',
