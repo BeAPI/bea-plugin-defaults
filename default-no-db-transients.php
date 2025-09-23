@@ -96,6 +96,12 @@ class NoTransients {
 			delete_option( $option );
 		}
 
+		/**
+		* Since all_options is called at each WordPres get_option, we need to unhook to not parse it each time.
+		**/
+		remove_filter( 'alloptions', [ $this, 'remove_transients_from_alloptions' ] );
+
+
 		return $alloptions;
 	}
 
