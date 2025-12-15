@@ -182,3 +182,52 @@ function add_admin_notice() {
 
 // Hook to add notice on admin pages
 \add_action( 'admin_notices', __NAMESPACE__ . '\\add_admin_notice' );
+
+/**
+ * Sends HTTP cache control headers for post type archives.
+ *
+ * This function checks if `cache_control_send_http_header` exists
+ * and if the current page is a post type archive (`is_post_type_archive()`).
+ * If both conditions are met, it removes its own hook to prevent duplicate execution
+ * and sends cache headers based on the 'categories' option.
+ *
+ * @return void
+ */
+function cache_control_send_post_type_archive_headers() {
+	if ( ! function_exists( 'cache_control_send_http_header' ) || ! is_post_type_archive() ) {
+		return;
+	}
+
+	remove_action( 'template_redirect', 'cache_control_send_headers' );
+
+	cache_control_send_http_header( cache_control_build_directive_from_option( 'categories' ) );
+}
+
+\add_action( 'template_redirect', __NAMESPACE__ . '\\cache_control_send_post_type_archive_headers', 9 );
+
+/**
+ * Sends HTTP cache control headers for robots.txt.
+ *
+ * This function hooks into 'do_robots' action to send cache headers
+ * Cache duration: 1 hour.
+ *
+ * @return void
+ */
+function cache_control_send_robots_headers() {
+	// 1 hour cache for robots.txt
+	$s_maxage = \HOUR_IN_SECONDS;
+
+	// Send cache headers directly
+	header(
+		sprintf(
+			'Cache-Control: public, max-age=%d, s-maxage=%d, stale-while-revalidate=%d, stale-if-error=%d',
+			$s_maxage,
+			$s_maxage,
+			$s_maxage * 5,
+			$s_maxage * 3
+		),
+		true // Replace existing Cache-Control header
+	);
+}
+
+\add_action( 'do_robots', __NAMESPACE__ . '\\cache_control_send_robots_headers', 1 );
