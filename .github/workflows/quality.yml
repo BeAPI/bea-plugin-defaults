@@ -20,12 +20,12 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl #optional, setup extensions
           ini-values: post_max_size=256M #optional, setup php.ini configuration
-          tools: psalm, phpcbf, phpcs
+          tools: phpcbf, phpcs
       - name: Check PHP Version
         run: php -v
 
       - name: Add dependencies
-        run: composer install
+        run: composer update && composer install
 
       - name: Check composer
         run: composer validate
