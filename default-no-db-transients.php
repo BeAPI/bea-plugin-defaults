@@ -97,10 +97,9 @@ class NoTransients {
 		}
 
 		/**
-		* Since all_options is called at each WordPres get_option, we need to unhook to not parse it each time.
+		* Since all_options is called at each WordPress get_option, we need to unhook to not parse it each time.
 		**/
 		remove_filter( 'alloptions', [ $this, 'remove_transients_from_alloptions' ] );
-
 
 		return $alloptions;
 	}
