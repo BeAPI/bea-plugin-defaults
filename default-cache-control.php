@@ -231,3 +231,73 @@ function cache_control_send_robots_headers() {
 }
 
 \add_action( 'do_robots', __NAMESPACE__ . '\\cache_control_send_robots_headers', 1 );
+
+/**
+ * Sends Cache-Control HTTP headers for WordPress REST API responses.
+ *
+ * Applies a conservative caching policy (1 hour) for GET/HEAD requests.
+ * No header is sent for logged-in users to avoid caching personalized responses.
+ *
+ * @since 2.1.0
+ *
+ * @param mixed             $result Response to send.
+ * @param \WP_REST_Server  $server Server instance.
+ * @param \WP_REST_Request $request Request used to generate the response.
+ * @return mixed Modified response.
+ */
+function cache_control_send_rest_api_headers( $result, $server, $request ) {
+	$method = $request->get_method();
+
+	if ( ! \in_array( $method, [ 'GET', 'HEAD' ], true ) ) {
+		return $result;
+	}
+
+	if ( \is_user_logged_in() ) {
+		return $result;
+	}
+
+	if ( ! $result instanceof \WP_REST_Response ) {
+		return $result;
+	}
+
+	$route = $request->get_route();
+
+	/**
+	 * Filter the REST routes allowed to receive Cache-Control headers.
+	 *
+	 * Return an empty array (default) to allow all routes.
+	 *
+	 * @param string[]            $whitelist List of allowed routes.
+	 * @param \WP_REST_Request    $request  Current REST request.
+	 * @param \WP_REST_Server     $server   REST server instance.
+	 */
+	$whitelist = \apply_filters(
+		'cache_control_rest_route_whitelist',
+		[],
+		$request,
+		$server
+	);
+
+	if ( ! empty( $whitelist ) ) {
+		if ( ! \is_array( $whitelist ) || ! \in_array( $route, $whitelist, true ) ) {
+			return $result;
+		}
+	}
+
+	$s_maxage = \HOUR_IN_SECONDS;
+
+	$result->header(
+		'Cache-Control',
+		sprintf(
+			'public, max-age=%d, s-maxage=%d, stale-while-revalidate=%d, stale-if-error=%d',
+			$s_maxage,
+			$s_maxage,
+			$s_maxage * 5,
+			$s_maxage * 3
+		)
+	);
+
+	return $result;
+}
+
+\add_filter( 'rest_post_dispatch', __NAMESPACE__ . '\\cache_control_send_rest_api_headers', 10, 3 );
