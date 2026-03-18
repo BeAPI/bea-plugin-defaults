@@ -214,14 +214,16 @@ function cache_control_send_post_type_archive_headers() {
  * @return void
  */
 function cache_control_send_robots_headers() {
-	// 1 hour cache for robots.txt
 	$s_maxage = \HOUR_IN_SECONDS;
+
+	// Set browser cache to 5 seconds to enable cache validation testing via HTTP headers
+	$max_age = 5;
 
 	// Send cache headers directly
 	header(
 		sprintf(
 			'Cache-Control: public, max-age=%d, s-maxage=%d, stale-while-revalidate=%d, stale-if-error=%d',
-			$s_maxage,
+			$max_age,
 			$s_maxage,
 			$s_maxage * 5,
 			$s_maxage * 3
@@ -286,11 +288,14 @@ function cache_control_send_rest_api_headers( $result, $server, $request ) {
 
 	$s_maxage = \HOUR_IN_SECONDS;
 
+	// Set browser cache to 5 seconds to enable cache validation testing via HTTP headers
+	$max_age = 5;
+
 	$result->header(
 		'Cache-Control',
 		sprintf(
 			'public, max-age=%d, s-maxage=%d, stale-while-revalidate=%d, stale-if-error=%d',
-			$s_maxage,
+			$max_age,
 			$s_maxage,
 			$s_maxage * 5,
 			$s_maxage * 3
