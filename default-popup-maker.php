@@ -9,6 +9,10 @@
 
 namespace BEAPI\Plugin_Defaults\Popup_Maker;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Cannot access pages directly.' );
+}
+
 add_filter( 'pum_alert_list', __NAMESPACE__ . '\\strip_filesystem_cache_alert', 999 );
 
 /**
