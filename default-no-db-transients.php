@@ -40,6 +40,11 @@ class NoTransients {
 	 * Initialize the class and set up hooks
 	 */
 	public function __construct() {
+		// Mirror WordPress core transient storage condition.
+		if ( ! $this->should_handle_transients() ) {
+			return;
+		}
+
 		// Prevent transients from being retrieved
 		add_filter( 'pre_option', [ $this, 'prevent_transient_retrieval' ], 10, 2 );
 
@@ -52,14 +57,8 @@ class NoTransients {
 		// Prevent transients from being updated
 		add_action( 'updated_option', [ $this, 'delete_transient_option' ] );
 
-		// Set up cleanup cron job
-		add_action( 'init', [ $this, 'setup_cleanup_cron' ] );
-
-		// Show admin notice if no external object cache is being used
-		add_action( 'admin_notices', [ $this, 'show_admin_notice' ] );
-
-		// Clean up transients from the database
-		add_action( 'beapi_clean_transients', [ $this, 'cleanup_transients' ] );
+		// Use WordPress native cleanup cron event.
+		add_action( 'wp_scheduled_delete', [ $this, 'cleanup_transients' ] );
 	}
 
 	/**
@@ -87,19 +86,16 @@ class NoTransients {
 	 * @return array The filtered options array
 	 */
 	public function remove_transients_from_alloptions( $alloptions ) {
+		// Unhook first to avoid re-entrancy while alloptions is being resolved.
+		remove_filter( 'alloptions', [ $this, 'remove_transients_from_alloptions' ] );
+
 		foreach ( $alloptions as $option => $value ) {
 			if ( ! str_starts_with( $option, '_transient' ) ) {
 				continue;
 			}
 
 			unset( $alloptions[ $option ] );
-			delete_option( $option );
 		}
-
-		/**
-		* Since all_options is called at each WordPress get_option, we need to unhook to not parse it each time.
-		**/
-		remove_filter( 'alloptions', [ $this, 'remove_transients_from_alloptions' ] );
 
 		return $alloptions;
 	}
@@ -117,18 +113,16 @@ class NoTransients {
 	}
 
 	/**
-	 * Set up weekly cron job to clean up transients
-	 */
-	public function setup_cleanup_cron() {
-		if ( ! wp_next_scheduled( 'beapi_clean_transients' ) ) {
-			wp_schedule_event( time(), 'weekly', 'beapi_clean_transients' );
-		}
-	}
-
-	/**
-	 * Clean up all transients from the database
+	 * Clean up all transients from the database.
+	 *
+	 * Runs on WordPress native cron hook `wp_scheduled_delete`,
+	 * which is scheduled once per day.
 	 */
 	public function cleanup_transients() {
+		if ( ! $this->should_handle_transients() ) {
+			return;
+		}
+
 		global $wpdb;
 
 		// Delete all transients
@@ -136,15 +130,15 @@ class NoTransients {
 	}
 
 	/**
-	 * Show admin notice if no external object cache is being used
-	 * The removal of transients when not object cache is a big performance issue
+	 * Match WordPress core transient behavior gate.
+	 *
+	 * Core uses object cache storage when external object cache is enabled
+	 * or while WordPress is installing.
+	 *
+	 * @return bool
 	 */
-	public function show_admin_notice() {
-		if ( wp_using_ext_object_cache() || ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		echo '<div class="notice notice-error"><p style="font-size: 40px;">Beware transients are not written in database. Please remove <strong>' . esc_html( wp_basename( __FILE__ ) ) . '</strong> from the mu-plugins folder.</p></div>';
+	private function should_handle_transients() {
+		return wp_using_ext_object_cache() || wp_installing();
 	}
 }
 
