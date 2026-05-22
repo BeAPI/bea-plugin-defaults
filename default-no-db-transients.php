@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: No transients in database
-Version: 1.1.0
-Description: Prevent transients from being stored in the database when external object cache is being used
+Version: 1.1.1
+Description: Keep transients out of wp_options when WordPress uses object cache storage (wp_using_ext_object_cache() || wp_installing()), with cleanup on native wp_scheduled_delete.
 Plugin URI: https://beapi.fr
 Author: Be API
 Author URI: https://beapi.fr
@@ -79,11 +79,13 @@ class NoTransients {
 	}
 
 	/**
-	 * Remove transients from alloptions array and delete them from database
-	 * This is because alloptions is called into the get_transient function, and expiration is not checked if the transient is in alloptions.
+	 * Remove transient entries from the alloptions cache.
 	 *
-	 * @param array $alloptions The array of all autoloaded options
-	 * @return array The filtered options array
+	 * WordPress may bypass timeout checks when a transient is present in alloptions.
+	 * By unsetting these keys here, transient reads follow the normal path.
+	 *
+	 * @param array $alloptions The array of all autoloaded options.
+	 * @return array The filtered options array.
 	 */
 	public function remove_transients_from_alloptions( $alloptions ) {
 		// Unhook first to avoid re-entrancy while alloptions is being resolved.
