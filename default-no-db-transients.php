@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: No transients in database
-Version: 1.0.0
+Version: 1.1.0
 Description: Prevent transients from being stored in the database when external object cache is being used
 Plugin URI: https://beapi.fr
 Author: Be API
