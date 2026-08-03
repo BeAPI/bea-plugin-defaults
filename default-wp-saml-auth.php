@@ -35,6 +35,8 @@ if ( ! defined( 'SAML_IDP_ENTITY_ID' ) || ! defined( 'SAML_IDP_URL' ) || ! defin
 }
 
 add_filter( 'wp_saml_auth_option', __NAMESPACE__ . '\\wp_saml_filter_option', 10, 2 );
+add_action( 'wp_saml_auth_existing_user_authenticated', __NAMESPACE__ . '\add_user_to_current_blog' );
+
 
 /**
  * Set options for SAML
@@ -211,4 +213,18 @@ function wp_saml_filter_option( $value, $option_name ) {
 	$value = isset( $defaults[ $option_name ] ) ? $defaults[ $option_name ] : $value;
 
 	return $value;
+}
+
+/**
+ * Add the user to the current blog
+ *
+ * @param \WP_User $user
+ * @return void
+ * @author Ingrid Azéma
+ */
+function add_user_to_current_blog( $user ): void {
+	if ( ! is_multisite() || ! is_a( $user, 'WP_User' ) || is_user_member_of_blog( $user->ID ) ) {
+		return;
+	}
+	add_user_to_blog( get_current_blog_id(), $user->ID, get_option( 'default_role' ) );
 }
